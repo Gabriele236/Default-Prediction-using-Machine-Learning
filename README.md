@@ -1,31 +1,29 @@
-# Default-Prediction-using-Machine-Learning
-Questo codice è un esempio di classificazione utilizzando l'algoritmo K-Nearest Neighbors (KNN) su un dataset CSV. KNN è un algoritmo di machine learning di tipo supervisionato utilizzato per la classificazione e la regressione.
+#K-Nearest Neighbors (K-NN) Algorithm with Hyperparameter Optimization
+This Python code demonstrates the application of the K-Nearest Neighbors (K-NN) algorithm for classification using GridSearchCV for hyperparameter tuning and cross-validation. The dataset is read from a CSV file named "Dataset.csv," where the target variable is located in the last column.
 
-Librerie utilizzate:
+#Requirements
+numpy
+pandas
+scikit-learn (including KNeighborsClassifier, StandardScaler, GridSearchCV, and cross_val_score)
+imbalanced-learn (imblearn) for oversampling
+Dataset Format
+The dataset should be in CSV format with the target variable in the last column and all other columns as features. The delimiter used in the CSV file should be a semicolon (";").
 
-numpy: Libreria per supportare operazioni matematiche su array multidimensionali.
-pandas: Libreria per la manipolazione e l'analisi dei dati.
-sklearn.preprocessing.StandardScaler: Classe per eseguire la standardizzazione delle caratteristiche (feature scaling).
-imblearn.over_sampling.RandomOverSampler: Classe per l'oversampling dei dati in caso di classi sbilanciate.
-sklearn.neighbors.KNeighborsClassifier: Classe per l'implementazione dell'algoritmo KNN.
-sklearn.metrics.classification_report: Funzione per calcolare il report di classificazione contenente diverse metriche.
-Fase di preparazione dei dati:
+#Steps
+Import Libraries: The necessary libraries, including numpy, pandas, scikit-learn, and imbalanced-learn, are imported.
 
-Lettura del file CSV: Il codice legge il file CSV chiamato "Dataset.csv" utilizzando pandas e imposta ";" come separatore dei valori e la prima riga come header dei nomi delle colonne. Il dataset viene memorizzato nel DataFrame "df".
-Splitting del dataset: Il dataset viene suddiviso in tre parti: training set (60% del dataset originale), validation set (20% del dataset originale) e testing set (20% del dataset originale). Questo viene fatto utilizzando la funzione np.split su un campione casuale del DataFrame "df".
-Preparazione dei dati per l'addestramento e la valutazione:
+Read Dataset: The code reads the dataset from "Dataset.csv" using pandas and stores it in the DataFrame "df."
 
-Scaling e Oversampling: Viene definita la funzione scale_dataset per effettuare lo scaling dei dati e, se richiesto, l'oversampling. In particolare, la funzione esegue le seguenti operazioni:
-Divide il DataFrame in matrice delle features "X" e vettore dei target "y".
-Utilizza la classe StandardScaler di scikit-learn per standardizzare le features nell'intervallo (media = 0, deviazione standard = 1).
-Se oversample=True, utilizza la classe RandomOverSampler di imbalanced-learn per bilanciare le classi dell'insieme di addestramento, aumentando il numero di campioni delle classi minoritarie fino a raggiungere il numero di campioni della classe maggioritaria.
-Restituisce i dataset scalati e, se applicato, l'oversampling.
-Addestramento del modello:
+Data Preprocessing: The function scale_dataset is defined to perform data preprocessing. It scales the feature data using StandardScaler and, if specified, applies RandomOverSampler to address class imbalance.
 
-Viene creato un modello di classificazione KNN utilizzando la classe KNeighborsClassifier di scikit-learn, con n_neighbors=5, che indica che il modello considererà i 5 vicini più prossimi per effettuare una previsione.
-Il modello viene addestrato sul training set utilizzando il metodo fit, passando le matrici di feature "X_train" e il vettore di target "y_train".
-Valutazione del modello:
+Hyperparameter Tuning for K-NN: GridSearchCV is used to find the best hyperparameters for the K-NN classifier. The hyperparameters to be explored are n_neighbors, weights, and metric.
 
-Viene utilizzato il modello addestrato per effettuare previsioni sul testing set utilizzando il metodo predict, ottenendo il vettore di previsioni "y_pred".
-Viene calcolato e stampato un report di classificazione utilizzando la funzione classification_report di scikit-learn, che mostra diverse metriche di valutazione (come precision, recall, f1-score e support) per ogni classe presente nel testing set.
-Nota importante: Nel caso in cui si voglia utilizzare questo codice su un altro dataset, assicurarsi di sostituire il nome del file "Dataset.csv" con il nome del proprio dataset. Inoltre, è possibile personalizzare alcuni iperparametri dell'algoritmo KNN come il numero di vicini "n_neighbors" o applicare altre tecniche di preprocessing dei dati, a seconda delle esigenze specifiche del problema.
+Print Best Parameters and Cross-Validation Score for K-NN: The results of the hyperparameter tuning are printed, including the best parameters and the corresponding cross-validation score for the K-NN model.
+
+Build Optimized K-NN Model: The best hyperparameters found from GridSearchCV are used to create an optimized K-NN model.
+
+Cross-Validation with Optimized K-NN Model: The optimized K-NN model is evaluated using cross-validation, and the cross-validation scores as well as the mean accuracy are printed.
+
+#Additional Notes
+The code assumes that the dataset file "Dataset.csv" exists in the same directory as the code file.
+The code includes the option to perform oversampling using RandomOverSampler. If the dataset is imbalanced, it is recommended to set oversample=True to improve model performance.
