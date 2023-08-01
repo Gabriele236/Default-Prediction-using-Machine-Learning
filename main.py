@@ -4,12 +4,11 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from imblearn.over_sampling import RandomOverSampler
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.svm import SVC
 from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.metrics import classification_report
 
 # LETTURA FILE CSV
-df = pd.read_csv("data.csv", sep=";", header=0)
+df = pd.read_csv("Dataset.csv", sep=";", header=0)
 
 # SCALING E OVERSAMPLE
 def scale_dataset(dataframe, oversample=False):
